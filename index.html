@@ -7,32 +7,216 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div id="boot-screen">
-        <div class="boot-content">
-            <h1>AURORA OS v1.3</h1>
-            <button id="init-btn">INITIALIZE SYSTEM</button>
+    <div id="desktop">
+        <!-- Top Bar -->
+        <div id="top-bar">
+            <div class="logo">AURORA OS v1.3</div>
+            <div id="clock"></div>
         </div>
-    </div>
 
-    <div id="desktop" style="display: none;">
-        <div id="icon-grid">
+        <!-- Desktop Icons -->
+        <div id="desktop-icons">
+            <div class="desktop-icon" data-target="notes">
+                <div class="icon">📝</div>
+                <div class="label">Notes.txt</div>
             </div>
+            <div class="desktop-icon" data-target="casefiles">
+                <div class="icon">📁</div>
+                <div class="label">Case Files</div>
+            </div>
+            <div class="desktop-icon" data-target="archive">
+                <div class="icon">📦</div>
+                <div class="label">Archive</div>
+            </div>
+            <div class="desktop-icon" data-target="terminal">
+                <div class="icon">>_</div>
+                <div class="label">Terminal</div>
+            </div>
+            <div class="desktop-icon" data-target="browser">
+                <div class="icon">🌐</div>
+                <div class="label">Browser</div>
+            </div>
+            <div class="desktop-icon" data-target="music">
+                <div class="icon">🎵</div>
+                <div class="label">Music</div>
+            </div>
+            <div class="desktop-icon" data-target="messenger">
+                <div class="icon">✉️</div>
+                <div class="label">Messenger</div>
+            </div>
+        </div>
 
-        <div class="taskbar">
-            <button class="start-btn">
-                <img src="https://win98icons.alexmeub.com/icons/png/windows-0.png" width="16">
-                AURORA OS
-            </button>
-            <div class="taskbar-divider"></div>
-            <div id="open-apps"></div>
-            <div class="systray">16:20 PM</div>
+        <!-- Notes Window -->
+        <div id="notes-window" class="window">
+            <div class="title-bar" onmousedown="dragStart(event, this.parentElement)">
+                <span>Notes.txt - Notepad</span>
+                <div class="title-buttons">
+                    <span class="win-btn">_</span>
+                    <span class="win-btn">□</span>
+                    <span class="win-btn close" onclick="closeWindow('notes-window')">×</span>
+                </div>
+            </div>
+            <div class="window-content">
+                <pre>They told me the archive was empty.
+
+But new records keep appearing.
+
+Files about people who were never born.
+
+Locations that were never built.
+
+I followed the trail deeper into the system logs.
+
+If anyone finds this backup, start with the photo fragment.
+
+Something is hidden there.
+
+— Vale</pre>
+            </div>
+        </div>
+
+        <!-- Case Files Window -->
+        <div id="casefiles-window" class="window">
+            <div class="title-bar" onmousedown="dragStart(event, this.parentElement)">
+                <span>Case Files</span>
+                <div class="title-buttons">
+                    <span class="win-btn">_</span>
+                    <span class="win-btn">□</span>
+                    <span class="win-btn close" onclick="closeWindow('casefiles-window')">×</span>
+                </div>
+            </div>
+            <div class="window-content">
+                <div class="file-list">
+                    <div class="file-item" onclick="openCaseFile(1)">casefile_01.txt</div>
+                    <div class="file-item" onclick="openCaseFile(2)">casefile_02.txt</div>
+                    <div class="file-item" onclick="openCaseFile(3)">casefile_03.txt</div>
+                    <div class="file-item" onclick="openPhoto()">photo_fragment.png</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Case File Viewers -->
+        <div id="case1-window" class="window">
+            <div class="title-bar" onmousedown="dragStart(event, this.parentElement)">
+                <span>casefile_01.txt - Dossier</span>
+                <div class="title-buttons">
+                    <span class="win-btn">_</span>
+                    <span class="win-btn">□</span>
+                    <span class="win-btn close" onclick="closeWindow('case1-window')">×</span>
+                </div>
+            </div>
+            <div class="window-content">
+                <h3>Subject: Unknown Individual</h3>
+                <p><strong>Status:</strong> Record Incomplete</p>
+                <p><strong>Last Seen Location:</strong> Sector 3 Archive Node</p>
+                <p><strong>Last Seen Date:</strong> [REDACTED]</p>
+                <p>"This record appeared in the archive but I cannot find any real-world evidence that this person ever existed..." - A. Vale</p>
+            </div>
+        </div>
+
+        <div id="case2-window" class="window">
+            <div class="title-bar" onmousedown="dragStart(event, this.parentElement)">
+                <span>casefile_02.txt - Dossier</span>
+                <div class="title-buttons">
+                    <span class="win-btn">_</span>
+                    <span class="win-btn">□</span>
+                    <span class="win-btn close" onclick="closeWindow('case2-window')">×</span>
+                </div>
+            </div>
+            <div class="window-content">
+                <h3>Subject: Intercepted Signal</h3>
+                <p><strong>Status:</strong> Encrypted</p>
+                <pre>20-8-5
+1-18-3-8-9-22-5
+18-5-13-5-13-2-5-18-19</pre>
+                <p><em>Simple substitution cipher (A=1, B=2...)</em></p>
+                <p>Hint: THE ARCHIVE REMEMBERS</p>
+            </div>
+        </div>
+
+        <div id="case3-window" class="window">
+            <div class="title-bar" onmousedown="dragStart(event, this.parentElement)">
+                <span>casefile_03.txt - Dossier</span>
+                <div class="title-buttons">
+                    <span class="win-btn">_</span>
+                    <span class="win-btn">□</span>
+                    <span class="win-btn close" onclick="closeWindow('case3-window')">×</span>
+                </div>
+            </div>
+            <div class="window-content">
+                <h3>Subject: Terminal Access</h3>
+                <p><strong>Status:</strong> Locked</p>
+                <p><strong>Target Node:</strong> 03</p>
+                <p>The terminal requires a specific phrase...</p>
+            </div>
+        </div>
+
+        <!-- Photo Fragment -->
+        <div id="photo-window" class="window">
+            <div class="title-bar" onmousedown="dragStart(event, this.parentElement)">
+                <span>photo_fragment.png - Image Viewer</span>
+                <div class="title-buttons">
+                    <span class="win-btn">_</span>
+                    <span class="win-btn">□</span>
+                    <span class="win-btn close" onclick="closeWindow('photo-window')">×</span>
+                </div>
+            </div>
+            <div class="window-content">
+                <img src="https://picsum.photos/id/1015/580/380" alt="Photo Fragment" style="width:100%; border:2px solid #00ffcc;">
+                <p style="margin-top:10px; color:#ffcc00;">Something is hidden here...</p>
+            </div>
+        </div>
+
+        <!-- Archive Window -->
+        <div id="archive-window" class="window">
+            <div class="title-bar" onmousedown="dragStart(event, this.parentElement)">
+                <span>Archive</span>
+                <div class="title-buttons">
+                    <span class="win-btn">_</span>
+                    <span class="win-btn">□</span>
+                    <span class="win-btn close" onclick="closeWindow('archive-window')">×</span>
+                </div>
+            </div>
+            <div class="window-content">
+                <div class="file-item" onclick="openStage2Note()">stage2_note.txt</div>
+            </div>
+        </div>
+
+        <!-- Terminal Window -->
+        <div id="terminal-window" class="window">
+            <div class="title-bar" onmousedown="dragStart(event, this.parentElement)">
+                <span>System Terminal</span>
+                <div class="title-buttons">
+                    <span class="win-btn">_</span>
+                    <span class="win-btn">□</span>
+                    <span class="win-btn close" onclick="closeWindow('terminal-window')">×</span>
+                </div>
+            </div>
+            <div class="window-content terminal-content">
+                <div id="terminal-output">AURORA OS v1.3 Terminal<br>Type 'help' for commands.<br><br></div>
+                <div class="prompt-line">
+                    <span>C:\></span>
+                    <input type="text" id="terminal-input" autocomplete="off">
+                </div>
+            </div>
+        </div>
+
+        <!-- Browser Window (simple) -->
+        <div id="browser-window" class="window">
+            <div class="title-bar" onmousedown="dragStart(event, this.parentElement)">
+                <span>Aurora Browser - Offline</span>
+                <div class="title-buttons">
+                    <span class="win-btn">_</span>
+                    <span class="win-btn">□</span>
+                    <span class="win-btn close" onclick="closeWindow('browser-window')">×</span>
+                </div>
+            </div>
+            <div class="window-content">
+                <p><strong>Archive Node 03</strong></p>
+                <p>Connection offline. Fragments recovered.</p>
+            </div>
         </div>
     </div>
-
-    <audio id="bg-music" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
 
     <script src="script.js"></script>
 </body>
