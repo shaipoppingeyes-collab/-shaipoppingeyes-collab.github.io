@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURORA OS v1.3</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="boot-screen">
+        <div class="boot-content">
+            <h1>AURORA OS v1.3</h1>
+            <button id="init-btn">INITIALIZE SYSTEM</button>
+        </div>
+    </div>
+
+    <div id="desktop" style="display: none;">
+        <div id="icon-grid">
+            </div>
+
+        <div class="taskbar">
+            <button class="start-btn">
+                <img src="https://win98icons.alexmeub.com/icons/png/windows-0.png" width="16">
+                AURORA OS
+            </button>
+            <div class="taskbar-divider"></div>
+            <div id="open-apps"></div>
+            <div class="systray">16:20 PM</div>
+        </div>
+    </div>
+
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
